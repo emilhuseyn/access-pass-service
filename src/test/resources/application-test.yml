@@ -6,3 +6,7 @@ access-pass:
       test-2026: dGVzdC1wYXNzLXNpZ25pbmcta2V5LTIwMjYtMDEyMzQ1Njc4OQ==
   jwt:
     secret: dGVzdC1qd3QtaG1hYy1zZWNyZXQtMDEyMzQ1Njc4OWFiY2RlZg==
+  scan:
+    rate-limit:
+      capacity: 10000
+      refill-per-second: 10000

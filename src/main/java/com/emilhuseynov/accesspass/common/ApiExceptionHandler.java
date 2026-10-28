@@ -1,5 +1,6 @@
 package com.emilhuseynov.accesspass.common;
 
+import com.emilhuseynov.accesspass.ratelimit.RateLimitExceededException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -33,6 +34,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(InvalidRequestException.class)
     ProblemDetail handleInvalidRequest(InvalidRequestException ex) {
         return problem(HttpStatus.BAD_REQUEST, "Invalid request", ex.getMessage());
+    }
+
+    @ExceptionHandler(RateLimitExceededException.class)
+    ResponseEntity<ProblemDetail> handleRateLimit(RateLimitExceededException ex) {
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .header(HttpHeaders.RETRY_AFTER, "1")
+                .body(problem(HttpStatus.TOO_MANY_REQUESTS, "Rate limit exceeded", ex.getMessage()));
     }
 
     @ExceptionHandler(BadCredentialsException.class)

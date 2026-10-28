@@ -74,8 +74,8 @@ public class AccessPass {
     protected AccessPass() {
     }
 
-    AccessPass(UUID id, Holder holder, PassPolicy policy, Instant validFrom, Instant validUntil, String keyId,
-               String nonce, Instant issuedAt, String issuedBy) {
+    public AccessPass(UUID id, Holder holder, PassPolicy policy, Instant validFrom, Instant validUntil, String keyId,
+                      String nonce, Instant issuedAt, String issuedBy) {
         this.id = id;
         this.holder = holder;
         this.policy = policy;
