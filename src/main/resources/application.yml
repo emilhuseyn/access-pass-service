@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: access-pass-service
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/access_pass}
+    username: ${DATABASE_USERNAME:access_pass}
+    password: ${DATABASE_PASSWORD:access_pass}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration/common
+  mvc:
+    problemdetails:
+      enabled: true
+  jackson:
+    default-property-inclusion: non_null
+
+server:
+  shutdown: graceful
