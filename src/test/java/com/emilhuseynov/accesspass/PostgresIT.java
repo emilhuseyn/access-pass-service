@@ -61,12 +61,12 @@ class PostgresIT {
 
         assertThatThrownBy(() -> jdbc.update("update scan_audit set outcome = 'DENIED', reason = 'REVOKED'"))
                 .isInstanceOf(DataAccessException.class)
-                .hasMessageContaining("append-only");
+                .hasStackTraceContaining("append-only");
         assertThatThrownBy(() -> jdbc.update("delete from scan_audit"))
                 .isInstanceOf(DataAccessException.class)
-                .hasMessageContaining("append-only");
+                .hasStackTraceContaining("append-only");
         assertThatThrownBy(() -> jdbc.execute("truncate scan_audit"))
                 .isInstanceOf(DataAccessException.class)
-                .hasMessageContaining("append-only");
+                .hasStackTraceContaining("append-only");
     }
 }
