@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: access_pass
+      POSTGRES_USER: access_pass
+      POSTGRES_PASSWORD: access_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U access_pass -d access_pass"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres:5432/access_pass
+      DATABASE_USERNAME: access_pass
+      DATABASE_PASSWORD: access_pass
+      # Development-only secrets. Generate real ones with: openssl rand -base64 32
+      ACCESSPASS_TOKENS_ACTIVEKEYID: dev1
+      ACCESSPASS_TOKENS_KEYS_DEV1: ZGV2LW9ubHktcGFzcy1zaWduaW5nLWtleS1kby1ub3QtdXNl
+      ACCESSPASS_JWT_SECRET: ZGV2LW9ubHktand0LXNpZ25pbmctc2VjcmV0LWRvLW5vdC11c2U=
+      ACCESSPASS_BOOTSTRAPADMIN_USERNAME: admin
+      ACCESSPASS_BOOTSTRAPADMIN_PASSWORD: local-dev-admin-password
+
+volumes:
+  postgres-data:
