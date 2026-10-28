@@ -1,0 +1,8 @@
+access-pass:
+  tokens:
+    active-key-id: test-2026
+    keys:
+      test-2025: dGVzdC1wYXNzLXNpZ25pbmcta2V5LTIwMjUtMDEyMzQ1Njc4OQ==
+      test-2026: dGVzdC1wYXNzLXNpZ25pbmcta2V5LTIwMjYtMDEyMzQ1Njc4OQ==
+  jwt:
+    secret: dGVzdC1qd3QtaG1hYy1zZWNyZXQtMDEyMzQ1Njc4OWFiY2RlZg==

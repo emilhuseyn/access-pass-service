@@ -19,3 +19,18 @@ spring:
 
 server:
   shutdown: graceful
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+access-pass:
+  jwt:
+    issuer: access-pass-service
+    ttl: 15m
